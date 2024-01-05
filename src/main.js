@@ -2,6 +2,19 @@ document.addEventListener("DOMContentLoaded", function(){
     const buttons = document.querySelectorAll('[data-tab-button]'); //pane
     const questions = document.querySelectorAll('[data-faq-question]'); //accordion
     
+    const heroSection = document.querySelector('.hero')
+    const alturaHero = heroSection.clientHeight
+
+    window.addEventListener("scroll", function(){
+        const posicaoAtual = window.scrollY;
+
+        if(posicaoAtual < alturaHero){
+            ocultaElementosDoHeader()
+        } else{
+            exibeElementosDoHeader()
+        }
+    })
+
  //logica para tab pane
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', function(botao){
@@ -14,11 +27,22 @@ document.addEventListener("DOMContentLoaded", function(){
         })
     }
 
-    //logica para accordion
+    //logica para accordion FAQ
     for (let i = 0; i <questions.length; i++) {
         questions[i].addEventListener('click', abreOuFechaResposta);
     }
 })
+
+
+function ocultaElementosDoHeader(){
+    const header = document.querySelector('header');
+    header.classList.add('header--is-hidden')
+}
+
+function  exibeElementosDoHeader(){
+    const header = document.querySelector('header');
+    header.classList.remove('header--is-hidden')
+}
 
 //accordion lógica
 function abreOuFechaResposta(elemento){
